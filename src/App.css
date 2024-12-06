@@ -1,0 +1,42 @@
+body {
+  background-image: url(https://media.istockphoto.com/id/157527872/it/foto/storm-cloud.jpg?s=612x612&w=0&k=20&c=EJR-bXv7MRmeDrTK5wj35FCSO4ENgdq6t3pez2zQbZg=);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  color: white;
+}
+
+#general-info {
+  color: white;
+  line-height: 0.9;
+}
+
+#general-info > p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#general-info h5 {
+  font-size: 2.5rem;
+}
+
+#general-info h1 {
+  font-size: 8rem;
+  font-weight: 100;
+}
+
+#min-max {
+  font-weight: 400;
+}
+
+#days-menu {
+  background-color: #7d7b7ac2;
+  border-radius: 5%;
+}
+
+#footer-menu {
+  background-color: #7d7b7ac2;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
