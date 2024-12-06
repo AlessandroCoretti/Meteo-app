@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
   const [error, setError] = useState(null);
   const [city, setCity] = useState("Roma");
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +44,13 @@ function App() {
         maxTemp: Math.round(weather.main.temp_max),
         description: weather.weather[0].description,
       });
+
+      const forecastRes = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&cnt=6&appid=5bc798bf6e0a7f6e2bf47de173ec5151`
+      );
+
+      const forecast = await forecastRes.json();
+      setForecastData(forecast.list);
     } catch (err) {
       setError(err.message || "Data not found");
     } finally {
@@ -52,11 +60,11 @@ function App() {
 
   useEffect(() => {
     fetchWeatherData();
-  }, []);
+  }, [city]);
 
   return (
     <>
-      <div className="d-flex justify-content-center my-4">
+      <div className="d-flex justify-content-center pt-4">
         <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Inserisci città" className="form-control w-50" />
         <button onClick={fetchWeatherData} className="btn btn-primary mx-2">
           Cerca
@@ -67,7 +75,7 @@ function App() {
       {error && <div className="text-danger">{error}</div>}
       {weatherData && <CustomHeader weatherData={weatherData} />}
 
-      <CustomDays />
+      <CustomDays forecastData={forecastData} />
       <CustomMenu />
     </>
   );

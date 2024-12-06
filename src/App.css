@@ -1,8 +1,7 @@
-body {
+#root {
   background-image: url(https://media.istockphoto.com/id/157527872/it/foto/storm-cloud.jpg?s=612x612&w=0&k=20&c=EJR-bXv7MRmeDrTK5wj35FCSO4ENgdq6t3pez2zQbZg=);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
   color: white;
 }
 
@@ -30,13 +29,39 @@ body {
 }
 
 #days-menu {
-  background-color: #7d7b7ac2;
+  background-color: #7d7b7a9a;
   border-radius: 5%;
 }
 
+#days-menu > div > p {
+  color: #cecac8;
+  font-size: 0.8rem;
+}
+
+#days-menu > div + hr + div > div > div > p:nth-child(1) {
+  color: rgb(78, 77, 77);
+}
+
+.temperature-bar {
+  width: 100%;
+  height: 5px;
+  background-color: rgb(44, 44, 44);
+  border-radius: 4px;
+  position: relative;
+}
+
+.temperature-range {
+  height: 100%;
+  background-color: rgb(7, 175, 175);
+  border-radius: 4px;
+}
+
 #footer-menu {
-  background-color: #7d7b7ac2;
+  background-color: #7d7b7a;
+  border-top: 1px solid;
+  border-color: #7d7b7ab0;
   position: fixed;
   width: 100%;
   bottom: 0;
+  z-index: 10000;
 }
