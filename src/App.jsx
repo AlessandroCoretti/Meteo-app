@@ -19,16 +19,22 @@ function App() {
       const locationRes = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=5bc798bf6e0a7f6e2bf47de173ec5151`);
       const locationData = await locationRes.json();
 
-      if (locationData.length === 0) {
+      if (!locationData || locationData.length === 0) {
         throw new Error("City not found");
       }
 
       const { lat, lon, name } = locationData[0];
+      if (!lat || !lon || !name) {
+        throw new Error("Not found data for location");
+      }
 
       const weatherRes = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=5bc798bf6e0a7f6e2bf47de173ec5151`
       );
       const weather = await weatherRes.json();
+      if (!weather.main) {
+        throw new Error("weather not found");
+      }
 
       setWeatherData({
         city: name,
