@@ -1,7 +1,7 @@
-const CustomMenu = () => {
+const CustomMenu = ({ bgColor }) => {
   return (
-    <>
-      <div id="footer-menu" className="d-flex justify-content-between py-2 px-4 pb-3 ">
+    <div>
+      <div id="footer-menu" className="d-flex justify-content-between py-2 px-4 pb-3 " style={{ backgroundColor: bgColor }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className="bi bi-map" viewBox="0 0 16 16">
           <path
             fillRule="evenodd"
@@ -15,7 +15,7 @@ const CustomMenu = () => {
           />
         </svg>
       </div>
-    </>
+    </div>
   );
 };
 export default CustomMenu;

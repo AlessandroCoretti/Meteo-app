@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const CustomDays = ({ forecastData }) => {
+const CustomDays = ({ forecastData, bgColor }) => {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
@@ -15,8 +15,8 @@ const CustomDays = ({ forecastData }) => {
   }, []);
 
   return (
-    <>
-      <div id="days-menu" className="mx-2 mt-5 mb-5 p-2">
+    <div>
+      <div id="days-menu" className="mx-2 mt-5 mb-5 p-2" style={{ backgroundColor: bgColor }}>
         <div className="d-flex align-items-baseline gap-1">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#cecac8" className="bi bi-calendar-week" viewBox="0 0 16 16">
             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
@@ -49,7 +49,7 @@ const CustomDays = ({ forecastData }) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default CustomDays;
