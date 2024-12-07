@@ -97,7 +97,7 @@ function App() {
 
   return (
     <div style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center", minHeight: "100vh" }}>
-      <Carousel activeIndex={cities.indexOf(city)} onSelect={handleSelect} controls={false} indicators={true} touch={true}>
+      <Carousel activeIndex={cities.indexOf(city)} onSelect={handleSelect} interval={null} controls={false} indicators={true} touch={true}>
         {cities.map((city, index) => (
           <Carousel.Item key={index}>
             <div className="d-flex justify-content-center pt-4">

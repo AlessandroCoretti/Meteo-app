@@ -14,6 +14,12 @@ const CustomDays = ({ forecastData, bgColor }) => {
     setDays(futureDays);
   }, []);
 
+  const calculateBarWidth = (tempMin, tempMax) => {
+    const range = tempMax - tempMin;
+    const maxRange = 20;
+    return `${Math.min((range / maxRange) * 100, 100)}%`;
+  };
+
   return (
     <div>
       <div id="days-menu" className="mx-2 mt-5 mb-5 p-2" style={{ backgroundColor: bgColor }}>
@@ -37,7 +43,7 @@ const CustomDays = ({ forecastData, bgColor }) => {
                   <div className="temperature-bar">
                     <div
                       className="temperature-range"
-                      style={{ width: `${(forecastData[index].main.temp_max - forecastData[index].main.temp_min) / 2}%,` }}
+                      style={{ width: calculateBarWidth(forecastData[index].main.temp_min, forecastData[index].main.temp_max) }}
                     ></div>
                   </div>
                   <p className="m=0 fs-6 ">{Math.round(forecastData[index].main.temp_max)}&deg;</p>
