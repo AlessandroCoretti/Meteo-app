@@ -7,17 +7,24 @@ import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 
 function App() {
-  const cities = ["Roma", "Milano", "Napoli", "Torino"];
+  const [cities, setCities] = useState(["Roma", "Milano", "Napoli", "Torino"]);
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [error, setError] = useState(null);
   const [city, setCity] = useState(cities[0]);
+  const [searchInput, setSearchInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bgImage, setBgImage] = useState("");
   const [bgDaysColor, setBgDaysColor] = useState("");
   const [bgMenuColor, setBgMenuColor] = useState("");
 
   const fetchWeatherData = async (city) => {
+    const cityToFetch = city.trim() || "Roma";
+
+    if (!cityToFetch) {
+      setError("Insert a valid location");
+      return;
+    }
     try {
       setIsLoading(true);
       setError(null);
@@ -38,6 +45,7 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=5bc798bf6e0a7f6e2bf47de173ec5151`
       );
       const weather = await weatherRes.json();
+      console.log(weather);
       if (!weather.main) {
         throw new Error("weather not found");
       }
@@ -80,9 +88,20 @@ function App() {
       const forecast = await forecastRes.json();
       setForecastData(forecast.list);
     } catch (err) {
+      console.log(err);
       setError(err.message || "Data not found");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchInput.trim()) {
+      setCities((prevCities) => [...prevCities, searchInput.trim()]);
+      setCity(searchInput.trim());
+      setSearchInput("");
+    } else {
+      setError("Insert a valid city");
     }
   };
 
@@ -98,12 +117,18 @@ function App() {
   return (
     <div style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center", minHeight: "100vh" }}>
       <Carousel activeIndex={cities.indexOf(city)} onSelect={handleSelect} interval={null} controls={false} indicators={true} touch={true}>
-        {cities.map((city, index) => (
+        {cities.map((_cityName, index) => (
           <Carousel.Item key={index}>
             <div className="d-flex justify-content-center pt-4">
-              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Inserisci città" className="form-control w-50" />
-              <button onClick={fetchWeatherData} className="btn btn-primary mx-2">
-                Cerca
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Inserisci città"
+                className="form-control w-50"
+              />
+              <button onClick={handleSearch} className="btn btn-primary mx-2">
+                Search
               </button>
             </div>
 
